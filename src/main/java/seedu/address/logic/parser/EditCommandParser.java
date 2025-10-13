@@ -19,7 +19,6 @@ import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.EditCommand;
 import seedu.address.logic.commands.EditCommand.EditPersonDescriptor;
 import seedu.address.logic.parser.exceptions.ParseException;
-import seedu.address.model.person.Attendance;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -64,9 +63,8 @@ public class EditCommandParser implements Parser<EditCommand> {
                     ParserUtil.parseTelegramHandle(argMultimap.getValue(PREFIX_TELEGRAM_HANDLE).get()));
         }
         if (argMultimap.getValue(PREFIX_ATTENDANCE).isPresent()) {
-            Index tutorial = Index.fromOneBased(Integer.parseInt(argMultimap.getValue(PREFIX_ATTENDANCE).get()));
-            editPersonDescriptor.setAttendance(
-                    editPersonDescriptor.getAttendance().orElse(new Attendance()).removeAttendance(tutorial));
+            editPersonDescriptor.setTutorial(
+                    Index.fromOneBased(Integer.parseInt(argMultimap.getValue(PREFIX_ATTENDANCE).get())));
         }
         parseTagsForEdit(argMultimap.getAllValues(PREFIX_TAG)).ifPresent(editPersonDescriptor::setTags);
 

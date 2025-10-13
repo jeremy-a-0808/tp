@@ -16,6 +16,7 @@ import java.util.Optional;
 import java.util.Set;
 
 import seedu.address.commons.core.Identifier;
+import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.CollectionUtil;
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.Messages;
@@ -111,7 +112,10 @@ public class EditCommand extends Command {
         StudentId oldStudentId = editPersonDescriptor.getStudentId().orElse(personToEdit.getStudentId());
         TelegramHandle updatedTelegramHandle = editPersonDescriptor.getTelegramHandle()
                 .orElse(personToEdit.getTelegramHandle());
-        Attendance updatedAttendance = editPersonDescriptor.getAttendance().orElse(personToEdit.getAttendance());
+        Attendance updatedAttendance = personToEdit.getAttendance();
+        if (editPersonDescriptor.getTutorial().isPresent()) {
+            updatedAttendance = updatedAttendance.removeAttendance(editPersonDescriptor.getTutorial().get());
+        }
         Set<Tag> updatedTags = editPersonDescriptor.getTags().orElse(personToEdit.getTags());
         ExamScores examScores = editPersonDescriptor.getExamScores().orElse(personToEdit.getExamScores());
 
@@ -157,6 +161,7 @@ public class EditCommand extends Command {
         private StudentId studentId;
         private TelegramHandle telegramHandle;
         private Attendance attendance;
+        private Index tutorialToDelete;
         private Set<Tag> tags;
         private ExamScores examScores;
 
@@ -173,7 +178,7 @@ public class EditCommand extends Command {
             setEmail(toCopy.email);
             setStudentId(toCopy.studentId);
             setTelegramHandle(toCopy.telegramHandle);
-            setAttendance(toCopy.attendance);
+            setTutorial(toCopy.tutorialToDelete);
             setTags(toCopy.tags);
             setExamScores(toCopy.examScores);
         }
@@ -182,7 +187,7 @@ public class EditCommand extends Command {
          * Returns true if at least one field is edited.
          */
         public boolean isAnyFieldEdited() {
-            return CollectionUtil.isAnyNonNull(name, phone, email, tags, telegramHandle, attendance);
+            return CollectionUtil.isAnyNonNull(name, phone, email, tags, telegramHandle, tutorialToDelete);
         }
 
         public void setName(Name name) {
@@ -231,6 +236,14 @@ public class EditCommand extends Command {
 
         public Optional<Attendance> getAttendance() {
             return Optional.ofNullable(attendance);
+        }
+
+        public void setTutorial(Index tutorial) {
+            this.tutorialToDelete = tutorial;
+        }
+
+        public Optional<Index> getTutorial() {
+            return Optional.ofNullable(tutorialToDelete);
         }
 
         /**

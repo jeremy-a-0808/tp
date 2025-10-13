@@ -74,7 +74,7 @@ public class Attendance {
      */
     public Attendance removeAttendance(Index tutorial) {
         String currentAttendance = this.toJson();
-        String[] attendanceSplit = currentAttendance.split(" ");
+        String[] attendanceSplit = currentAttendance.split("\\s+");
         attendanceSplit[tutorial.getZeroBased()] = "false";
         return new Attendance(String.join(" ", attendanceSplit));
     }
