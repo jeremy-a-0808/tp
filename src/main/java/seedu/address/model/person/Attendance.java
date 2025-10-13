@@ -70,6 +70,16 @@ public class Attendance {
     }
 
     /**
+     * Sets attendance for {@param tutorial} to false
+     */
+    public Attendance removeAttendance(Index tutorial) {
+        String currentAttendance = this.toJson();
+        String[] attendanceSplit = currentAttendance.split(" ");
+        attendanceSplit[tutorial.getZeroBased()] = "false";
+        return new Attendance(String.join(" ", attendanceSplit));
+    }
+
+    /**
      * converts Attendance to a JsonAdaptedPerson friendly format
      */
     public String toJson() {

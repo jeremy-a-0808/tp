@@ -16,6 +16,8 @@ import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_FRIEND;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TELEGRAM_HANDLE_AMY_STR;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TELEGRAM_HANDLE_BOB_STR;
+import static seedu.address.testutil.TypicalAttendance.ATTENDANCE_ALL_FALSE;
+import static seedu.address.testutil.TypicalAttendance.ATTENDANCE_ALL_TRUE;
 import static seedu.address.testutil.TypicalExamScores.EXAM_SCORES_MIDTERM;
 import static seedu.address.testutil.TypicalExamScores.EXAM_SCORES_MIDTERM_FINAL;
 
@@ -26,7 +28,6 @@ import java.util.List;
 import java.util.Set;
 
 import seedu.address.model.AddressBook;
-import seedu.address.model.person.Attendance;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
@@ -50,8 +51,7 @@ public class TypicalPersons {
             new Email("alice@u.nus.edu"),
             new StudentId("A0000000A"),
             new TelegramHandle("@Alice"))
-            .withAttendance(new Attendance(
-                    "false false false false false false false false false false false"))
+            .withAttendance(ATTENDANCE_ALL_FALSE)
             .withExamScores(EXAM_SCORES_MIDTERM_FINAL)
             .withTags(FRIEND_TAG)
             .build();
@@ -72,8 +72,7 @@ public class TypicalPersons {
             new Email("johnd@u.nus.edu"),
             new StudentId("A0000001A"),
             new TelegramHandle("@Benson"))
-            .withAttendance(new Attendance(
-                    "true false false true false true false false true false false"))
+            .withAttendance(ATTENDANCE_ALL_TRUE)
             .withExamScores(EXAM_SCORES_MIDTERM)
             .withTags(OWES_MONEY_FRIENDS_TAGS)
             .build();

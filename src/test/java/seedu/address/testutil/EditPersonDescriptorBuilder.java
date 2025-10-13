@@ -5,6 +5,7 @@ import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 import seedu.address.logic.commands.EditCommand.EditPersonDescriptor;
+import seedu.address.model.person.Attendance;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
@@ -80,6 +81,15 @@ public class EditPersonDescriptorBuilder {
         descriptor.setTelegramHandle(new TelegramHandle(telegramHandle));
         return this;
     }
+
+    /**
+     * Sets the {@code Attendance} of the {@code EditPersonDescriptor} that we are building.
+     */
+    public EditPersonDescriptorBuilder withAttendance(String attendance) {
+        descriptor.setAttendance(new Attendance(attendance));
+        return this;
+    }
+
     /**
      * Parses the {@code tags} into a {@code Set<Tag>} and set it to the {@code EditPersonDescriptor}
      * that we are building.

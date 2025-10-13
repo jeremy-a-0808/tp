@@ -2,6 +2,7 @@ package seedu.address.logic.parser;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_ATTENDANCE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
@@ -14,9 +15,11 @@ import java.util.Optional;
 import java.util.Set;
 
 import seedu.address.commons.core.Identifier;
+import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.EditCommand;
 import seedu.address.logic.commands.EditCommand.EditPersonDescriptor;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.person.Attendance;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -33,7 +36,7 @@ public class EditCommandParser implements Parser<EditCommand> {
         requireNonNull(args);
         ArgumentMultimap argMultimap =
                 ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL, PREFIX_TAG,
-                        PREFIX_TELEGRAM_HANDLE);
+                        PREFIX_TELEGRAM_HANDLE, PREFIX_ATTENDANCE);
 
         Identifier index;
 
@@ -59,6 +62,11 @@ public class EditCommandParser implements Parser<EditCommand> {
         if (argMultimap.getValue(PREFIX_TELEGRAM_HANDLE).isPresent()) {
             editPersonDescriptor.setTelegramHandle(
                     ParserUtil.parseTelegramHandle(argMultimap.getValue(PREFIX_TELEGRAM_HANDLE).get()));
+        }
+        if (argMultimap.getValue(PREFIX_ATTENDANCE).isPresent()) {
+            Index tutorial = Index.fromOneBased(Integer.parseInt(argMultimap.getValue(PREFIX_ATTENDANCE).get()));
+            editPersonDescriptor.setAttendance(
+                    editPersonDescriptor.getAttendance().orElse(new Attendance()).removeAttendance(tutorial));
         }
         parseTagsForEdit(argMultimap.getAllValues(PREFIX_TAG)).ifPresent(editPersonDescriptor::setTags);
 

@@ -2,6 +2,7 @@ package seedu.address.logic.commands;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_ATTENDANCE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EXAM;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
@@ -19,7 +20,6 @@ import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
-import seedu.address.model.person.Address;
 import seedu.address.model.person.Attendance;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Exam;
@@ -47,12 +47,11 @@ public class CommandTestUtil {
     public static final String VALID_EMAIL_AMY_STR = "amy@u.nus.edu";
     public static final String VALID_EMAIL_ALICE_STR = "alice@u.nus.edu";
     public static final String VALID_EMAIL_BOB_STR = "bob@u.nus.edu";
-    public static final String VALID_ADDRESS_AMY_STR = "Block 312, Amy Street 1";
-    public static final String VALID_ADDRESS_BOB_STR = "Block 123, Bobby Street 3";
-    public static final String VALID_ATTENDANCE_AMY_STR =
-            "true false false false false false false false false false false";
-    public static final String VALID_ATTENDANCE_BOB_STR =
-            "true true true true false true false false false false false";
+    public static final String VALID_ATTENDANCE_AMY_STR = "false ".repeat(Attendance.NUMBER_OF_TUTORIALS);
+    public static final String VALID_ATTENDANCE_BOB_STR = "true ".repeat(Attendance.NUMBER_OF_TUTORIALS);
+    public static final String VALID_TUTORIAL_AMY_STR = "1";
+    public static final String VALID_TUTORIAL_BOB_STR = String.valueOf(Attendance.NUMBER_OF_TUTORIALS);
+
     public static final String VALID_TELEGRAM_HANDLE_AMY_STR = "@Amy";
     public static final String VALID_TELEGRAM_HANDLE_BOB_STR = "@Bob";
 
@@ -64,8 +63,6 @@ public class CommandTestUtil {
     public static final Email VALID_EMAIL_BOB = new Email(VALID_EMAIL_BOB_STR);
     public static final StudentId VALID_STUDENT_ID_AMY = new StudentId(VALID_STUDENT_ID_AMY_STR);
     public static final StudentId VALID_STUDENT_ID_BOB = new StudentId(VALID_STUDENT_ID_BOB_STR);
-    public static final Address VALID_ADDRESS_AMY = new Address(VALID_ADDRESS_AMY_STR);
-    public static final Address VALID_ADDRESS_BOB = new Address(VALID_ADDRESS_BOB_STR);
     public static final Attendance VALID_ATTENDANCE_AMY = new Attendance(VALID_ATTENDANCE_AMY_STR);
     public static final Attendance VALID_ATTENDANCE_BOB = new Attendance(VALID_ATTENDANCE_BOB_STR);
     public static final Score VALID_SCORE_MIDTERM = Score.getRecordedScore(Exam.MIDTERM, "50");
@@ -91,6 +88,8 @@ public class CommandTestUtil {
     public static final String PHONE_DESC_BOB = " " + PREFIX_PHONE + VALID_PHONE_BOB_STR;
     public static final String EMAIL_DESC_AMY = " " + PREFIX_EMAIL + VALID_EMAIL_AMY_STR;
     public static final String EMAIL_DESC_BOB = " " + PREFIX_EMAIL + VALID_EMAIL_BOB_STR;
+    public static final String TUTORIAL_DESC_AMY = " " + PREFIX_ATTENDANCE + VALID_TUTORIAL_AMY_STR;
+    public static final String TUTORIAL_DESC_BOB = " " + PREFIX_ATTENDANCE + VALID_TUTORIAL_BOB_STR;
     public static final String TAG_DESC_FRIEND = " " + PREFIX_TAG + VALID_TAG_FRIEND;
     public static final String TAG_DESC_HUSBAND = " " + PREFIX_TAG + VALID_TAG_HUSBAND;
     public static final String EXAM_DESC = " " + PREFIX_EXAM + VALID_EXAM;

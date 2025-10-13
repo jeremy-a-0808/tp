@@ -6,6 +6,9 @@ import static seedu.address.logic.commands.CommandTestUtil.VALID_ATTENDANCE_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_STUDENT_ID_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
+import static seedu.address.testutil.TypicalAttendance.INDEX_FIRST_TUTORIAL;
+import static seedu.address.testutil.TypicalAttendance.INDEX_INVALID_TUTORIAL;
+import static seedu.address.testutil.TypicalAttendance.INDEX_SECOND_TUTORIAL;
 import static seedu.address.testutil.TypicalIdentifiers.IDENTIFIER_FIRST_PERSON;
 import static seedu.address.testutil.TypicalIdentifiers.IDENTIFIER_INDEX_OUT_OF_RANGE;
 import static seedu.address.testutil.TypicalIdentifiers.IDENTIFIER_SECOND_PERSON;
@@ -14,19 +17,14 @@ import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
 
 import org.junit.jupiter.api.Test;
 
-import seedu.address.commons.core.index.Index;
 import seedu.address.logic.Messages;
 import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
-import seedu.address.model.person.Attendance;
 import seedu.address.model.person.Person;
 
 public class AttendCommandTest {
-    private static final Index INDEX_FIRST_TUTORIAL = Index.fromOneBased(1);
-    private static final Index INDEX_SECOND_TUTORIAL = Index.fromOneBased(2);
-    private static final Index INDEX_INVALID_TUTORIAL = Index.fromZeroBased(Attendance.NUMBER_OF_TUTORIALS);
 
     private Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
 
@@ -60,7 +58,7 @@ public class AttendCommandTest {
         Person personToEdit = model.getFilteredPersonList().get(0);
         Person editedPerson = new Person.PersonBuilder(personToEdit)
                 .withStudentId(VALID_STUDENT_ID_AMY)
-                .withAttendance(VALID_ATTENDANCE_AMY)
+                .withAttendance(VALID_ATTENDANCE_AMY.addAttendance(INDEX_FIRST_TUTORIAL))
                 .build();
 
         AttendCommand attendCommand = new AttendCommand(IDENTIFIER_FIRST_PERSON, INDEX_FIRST_TUTORIAL);

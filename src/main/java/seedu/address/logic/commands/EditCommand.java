@@ -1,10 +1,12 @@
 package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_ATTENDANCE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_TELEGRAM_HANDLE;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 
 import java.util.Collections;
@@ -19,6 +21,7 @@ import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
+import seedu.address.model.person.Attendance;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.ExamScores;
 import seedu.address.model.person.Name;
@@ -43,13 +46,15 @@ public class EditCommand extends Command {
             + "[" + PREFIX_NAME + "NAME] "
             + "[" + PREFIX_PHONE + "PHONE] "
             + "[" + PREFIX_EMAIL + "EMAIL] "
+            + "[" + PREFIX_TELEGRAM_HANDLE + "TELEGRAM_HANDLE]"
+            + "[" + PREFIX_ATTENDANCE + "TUTORIAL_TO_REMOVE]"
             + "[" + PREFIX_TAG + "TAG]...\n"
             + "Example: " + COMMAND_WORD + " 1 "
             + PREFIX_PHONE + "91234567 "
             + PREFIX_EMAIL + "johndoe@example.com\n"
             + "Example: " + COMMAND_WORD + " A0235410A "
             + PREFIX_PHONE + "91234567 "
-            + PREFIX_EMAIL + "johndoe@example.com";
+            + PREFIX_ATTENDANCE + "4";
 
     public static final String MESSAGE_EDIT_PERSON_SUCCESS = "Edited Person: %1$s";
     public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided.";
@@ -106,10 +111,12 @@ public class EditCommand extends Command {
         StudentId oldStudentId = editPersonDescriptor.getStudentId().orElse(personToEdit.getStudentId());
         TelegramHandle updatedTelegramHandle = editPersonDescriptor.getTelegramHandle()
                 .orElse(personToEdit.getTelegramHandle());
+        Attendance updatedAttendance = editPersonDescriptor.getAttendance().orElse(personToEdit.getAttendance());
         Set<Tag> updatedTags = editPersonDescriptor.getTags().orElse(personToEdit.getTags());
         ExamScores examScores = editPersonDescriptor.getExamScores().orElse(personToEdit.getExamScores());
 
         return new Person.PersonBuilder(updatedName, updatedPhone, updatedEmail, oldStudentId, updatedTelegramHandle)
+                .withAttendance(updatedAttendance)
                 .withTags(updatedTags)
                 .withExamScores(examScores)
                 .build();
@@ -149,6 +156,7 @@ public class EditCommand extends Command {
         private Email email;
         private StudentId studentId;
         private TelegramHandle telegramHandle;
+        private Attendance attendance;
         private Set<Tag> tags;
         private ExamScores examScores;
 
@@ -165,6 +173,7 @@ public class EditCommand extends Command {
             setEmail(toCopy.email);
             setStudentId(toCopy.studentId);
             setTelegramHandle(toCopy.telegramHandle);
+            setAttendance(toCopy.attendance);
             setTags(toCopy.tags);
             setExamScores(toCopy.examScores);
         }
@@ -173,7 +182,7 @@ public class EditCommand extends Command {
          * Returns true if at least one field is edited.
          */
         public boolean isAnyFieldEdited() {
-            return CollectionUtil.isAnyNonNull(name, phone, email, tags, telegramHandle);
+            return CollectionUtil.isAnyNonNull(name, phone, email, tags, telegramHandle, attendance);
         }
 
         public void setName(Name name) {
@@ -214,6 +223,14 @@ public class EditCommand extends Command {
 
         public Optional<TelegramHandle> getTelegramHandle() {
             return Optional.ofNullable(telegramHandle);
+        }
+
+        public void setAttendance(Attendance attendance) {
+            this.attendance = attendance;
+        }
+
+        public Optional<Attendance> getAttendance() {
+            return Optional.ofNullable(attendance);
         }
 
         /**
