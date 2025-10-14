@@ -12,7 +12,9 @@ import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.logic.commands.CommandTestUtil.showPersonAtIndex;
+import static seedu.address.testutil.TypicalAttendance.ATTENDANCE_A;
 import static seedu.address.testutil.TypicalAttendance.ATTENDANCE_ALL_FALSE;
+import static seedu.address.testutil.TypicalAttendance.ATTENDANCE_B;
 import static seedu.address.testutil.TypicalExamScores.EXAM_SCORES_MIDTERM_FINAL;
 import static seedu.address.testutil.TypicalIdentifiers.IDENTIFIER_FIRST_PERSON;
 import static seedu.address.testutil.TypicalIdentifiers.IDENTIFIER_SECOND_PERSON;
@@ -31,6 +33,7 @@ import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
+import seedu.address.model.person.Attendance;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
@@ -77,6 +80,31 @@ public class EditCommandTest {
 
         Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
         expectedModel.setPerson(lastPerson, editedPerson);
+
+        assertCommandSuccess(editCommand, model, expectedMessage, expectedModel);
+    }
+
+    public void execute_attendanceFieldSpecified_success() {
+        Person firstPerson = model.getFilteredPersonList().get(0);
+        Person newFirstPerson = new Person.PersonBuilder(firstPerson)
+                .withAttendance(ATTENDANCE_B)
+                .withExamScores(EXAM_SCORES_MIDTERM_FINAL).build();
+
+        Person editedPerson = new Person.PersonBuilder(firstPerson)
+                .withAttendance(ATTENDANCE_A)
+                .withExamScores(EXAM_SCORES_MIDTERM_FINAL).build();
+
+        EditPersonDescriptor descriptor = new EditPersonDescriptorBuilder()
+                .withTutorial(String.valueOf(Attendance.NUMBER_OF_TUTORIALS))
+                .build();
+
+        model.setPerson(firstPerson, newFirstPerson);
+        EditCommand editCommand = new EditCommand(IDENTIFIER_FIRST_PERSON, descriptor);
+
+        String expectedMessage = String.format(EditCommand.MESSAGE_EDIT_PERSON_SUCCESS, Messages.format(editedPerson));
+
+        Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
+        expectedModel.setPerson(firstPerson, editedPerson);
 
         assertCommandSuccess(editCommand, model, expectedMessage, expectedModel);
     }

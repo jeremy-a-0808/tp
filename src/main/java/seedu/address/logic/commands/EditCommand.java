@@ -230,14 +230,6 @@ public class EditCommand extends Command {
             return Optional.ofNullable(telegramHandle);
         }
 
-        public void setAttendance(Attendance attendance) {
-            this.attendance = attendance;
-        }
-
-        public Optional<Attendance> getAttendance() {
-            return Optional.ofNullable(attendance);
-        }
-
         public void setTutorial(Index tutorial) {
             this.tutorialToDelete = tutorial;
         }
