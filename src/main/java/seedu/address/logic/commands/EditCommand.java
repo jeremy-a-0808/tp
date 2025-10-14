@@ -288,6 +288,7 @@ public class EditCommand extends Command {
                     && Objects.equals(phone, otherEditPersonDescriptor.phone)
                     && Objects.equals(email, otherEditPersonDescriptor.email)
                     && Objects.equals(telegramHandle, otherEditPersonDescriptor.telegramHandle)
+                    && Objects.equals(tutorialToDelete, otherEditPersonDescriptor.tutorialToDelete)
                     && Objects.equals(tags, otherEditPersonDescriptor.tags)
                     && Objects.equals(examScores, otherEditPersonDescriptor.examScores);
         }
@@ -299,6 +300,7 @@ public class EditCommand extends Command {
                     .add("phone", phone)
                     .add("email", email)
                     .add("telegramHandle", telegramHandle)
+                    .add("tutorial", tutorialToDelete)
                     .add("tags", tags)
                     .add("exam scores", examScores)
                     .toString();

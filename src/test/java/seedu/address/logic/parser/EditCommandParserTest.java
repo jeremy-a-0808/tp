@@ -20,6 +20,7 @@ import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_AMY_STR;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_BOB_STR;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_FRIEND;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_TUTORIAL_AMY_STR;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
@@ -152,7 +153,7 @@ public class EditCommandParserTest {
 
         // attendance
         userInput = THIRD_PERSON_STR + TUTORIAL_DESC_AMY;
-        descriptor = new EditPersonDescriptorBuilder().withAttendance(VALID_ATTENDANCE_AMY_STR).build();
+        descriptor = new EditPersonDescriptorBuilder().withTutorial(VALID_TUTORIAL_AMY_STR).build();
         expectedCommand = new EditCommand(targetIdentifier, descriptor);
         assertParseSuccess(parser, userInput, expectedCommand);
 

@@ -47,6 +47,10 @@ public class EditPersonDescriptorTest {
         editedAmy = new EditPersonDescriptorBuilder(DESC_AMY).withEmail(VALID_EMAIL_BOB_STR).build();
         assertFalse(DESC_AMY.equals(editedAmy));
 
+        // diff tutorial to delete -> returns false
+        editedAmy = new EditPersonDescriptorBuilder(DESC_AMY).withTutorial("1").build();
+        assertFalse(DESC_AMY.equals(editedAmy));
+
         // different tags -> returns false
         editedAmy = new EditPersonDescriptorBuilder(DESC_AMY).withTags(VALID_TAG_HUSBAND).build();
         assertFalse(DESC_AMY.equals(editedAmy));
@@ -55,13 +59,14 @@ public class EditPersonDescriptorTest {
     @Test
     public void toStringMethod() {
         EditPersonDescriptor editPersonDescriptor = new EditPersonDescriptor();
-        String expected = EditPersonDescriptor.class.getCanonicalName() + "{name="
-                + editPersonDescriptor.getName().orElse(null) + ", phone="
-                + editPersonDescriptor.getPhone().orElse(null) + ", email="
-                + editPersonDescriptor.getEmail().orElse(null) + ", telegramHandle="
-                + editPersonDescriptor.getTelegramHandle().orElse(null) + ", tags="
-                + editPersonDescriptor.getTags().orElse(null) + ", exam scores="
-                + editPersonDescriptor.getExamScores().orElse(null) + "}";
+        String expected = EditPersonDescriptor.class.getCanonicalName()
+                + "{name=" + editPersonDescriptor.getName().orElse(null)
+                + ", phone=" + editPersonDescriptor.getPhone().orElse(null)
+                + ", email=" + editPersonDescriptor.getEmail().orElse(null)
+                + ", telegramHandle=" + editPersonDescriptor.getTelegramHandle().orElse(null)
+                + ", tutorial=" + editPersonDescriptor.getTutorial().orElse(null)
+                + ", tags=" + editPersonDescriptor.getTags().orElse(null)
+                + ", exam scores=" + editPersonDescriptor.getExamScores().orElse(null) + "}";
         assertEquals(expected, editPersonDescriptor.toString());
     }
 }

@@ -4,6 +4,7 @@ import java.util.Set;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
+import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.EditCommand.EditPersonDescriptor;
 import seedu.address.model.person.Attendance;
 import seedu.address.model.person.Email;
@@ -83,10 +84,10 @@ public class EditPersonDescriptorBuilder {
     }
 
     /**
-     * Sets the {@code Attendance} of the {@code EditPersonDescriptor} that we are building.
+     * Sets the {@code Index} tutorial to delete of the {@code EditPersonDescriptor} that we are building.
      */
-    public EditPersonDescriptorBuilder withAttendance(String attendance) {
-        descriptor.setAttendance(new Attendance(attendance));
+    public EditPersonDescriptorBuilder withTutorial(String tutorialToDelete) {
+        descriptor.setTutorial(Index.fromOneBased(Integer.parseInt(tutorialToDelete)));
         return this;
     }
 
