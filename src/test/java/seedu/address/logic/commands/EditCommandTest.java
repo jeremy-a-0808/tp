@@ -84,6 +84,7 @@ public class EditCommandTest {
         assertCommandSuccess(editCommand, model, expectedMessage, expectedModel);
     }
 
+    @Test
     public void execute_attendanceFieldSpecified_success() {
         Person firstPerson = model.getFilteredPersonList().get(0);
         Person newFirstPerson = new Person.PersonBuilder(firstPerson)
@@ -104,7 +105,8 @@ public class EditCommandTest {
         String expectedMessage = String.format(EditCommand.MESSAGE_EDIT_PERSON_SUCCESS, Messages.format(editedPerson));
 
         Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
-        expectedModel.setPerson(firstPerson, editedPerson);
+        Person expectedFirstPerson = model.getFilteredPersonList().get(0);
+        expectedModel.setPerson(expectedFirstPerson, editedPerson);
 
         assertCommandSuccess(editCommand, model, expectedMessage, expectedModel);
     }

@@ -89,4 +89,10 @@ public class AttendCommandTest {
 
         assertCommandFailure(attendCommand, model, AttendCommand.MESSAGE_WRONG_TUTORIAL);
     }
+
+    @Test
+    public void toString_failure() {
+        AttendCommand attendCommand = new AttendCommand(IDENTIFIER_FIRST_PERSON, INDEX_FIRST_TUTORIAL);
+        assertNotEquals(attendCommand.toString(), "NOT THE RIGHT TOSTRING");
+    }
 }
