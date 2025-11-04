@@ -984,7 +984,8 @@ ___
 
 4. **Mass attendance marking**: CadetHQ currently only allows the user to mark each student's attendance one at a time. Adding the ability to mass record attendance makes it easier to mark all students in a tutorial. Some proposed implementations are shown below:
     * `massattend 1-10 1`: marks attendance for students from index 1 to 10 in the list for tutorial 1.
-    * `massattend t/TAG 5`: marks attendance for students with the specified `TAG` for tutorial 5. <br>
+    * `massattend t/TAG 5`: marks attendance for students with the specified `TAG` for tutorial 5.
+
 
 5. **Enhanced find functionality**: CadetHQ currently only allows the user to search by name. Adding the ability to search by tutorial attended or tags, and allowing partial matches makes it easier for the user to find the students they are looking for.
 
